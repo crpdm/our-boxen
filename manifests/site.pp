@@ -58,6 +58,9 @@ node default {
   include hub
   include nginx
   include chrome
+  include sublime_text
+  include iterm2::stable
+  include postgresql
 
   # fail if FDE is not enabled
   if $::root_encrypted == 'no' {
@@ -67,6 +70,12 @@ node default {
   # default ruby versions
   ruby::version { '1.9.3': }
   ruby::version { '2.1.2': }
+  ruby::version { '2.1.5': }
+  ruby_gem { 'bundler for all rubies':
+    gem          => 'bundler',
+    version      => '~> 1.0',
+    ruby_version => '*',
+  }
 
   # common, useful packages
   package {
